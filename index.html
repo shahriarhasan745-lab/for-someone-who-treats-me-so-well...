@@ -5,41 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wanna Be Yours 💖</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* ব্যাকগ্রাউন্ড হার্টস যেন বাটনের ক্লিকের সামনে বাধা না হয়ে দাঁড়ায় */
-        .bg-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* এটি অত্যন্ত জরুরি যেন ক্লিকে বাধা না দেয় */
-            z-index: 0;
-        }
-        .screen {
-            position: relative;
-            z-index: 10;
-        }
-        .keypad button {
-            cursor: pointer;
-            position: relative;
-            z-index: 20;
-        }
-    </style>
 </head>
 <body>
 
-    <!-- Background Music -->
     <audio id="bg-music" loop preload="auto" crossorigin="anonymous">
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Music Status Indicator -->
-    <div id="music-indicator" class="music-box" onclick="toggleMusic()" style="z-index: 100;">
+    <div id="music-indicator" class="music-box" onclick="toggleMusic()">
         <span class="disc">🎵</span>
     </div>
 
-    <!-- Floating Background Hearts -->
     <div class="bg-hearts">
         <div class="heart-particle">❤️</div>
         <div class="heart-particle">💖</div>
@@ -47,12 +23,11 @@
         <div class="heart-particle">✨</div>
     </div>
 
-    <!-- 1. Lock Screen (Pic 1) -->
     <div id="lock-screen" class="screen active">
         <div class="lock-container">
             <div class="left-panel">
                 <div class="heart-frame">
-                    <img src="IMG_20260704_181355.jpg.jpeg" alt="Special Pic">
+                    <img src="IMG_20260704_181355.jpg.jpeg" alt="Special Memory">
                 </div>
             </div>
             <div class="right-panel">
@@ -82,17 +57,15 @@
         </div>
     </div>
 
-    <!-- 2. Wrong Passcode Screen -->
     <div id="wrong-screen" class="screen">
         <div class="wrong-container">
             <h1>WRONG PASSCODE</h1>
             <div class="peeking-penguin">❓🐧</div>
             <p>Oops! That's not the right code. Try again! 👀</p>
-            <button class="btn" onclick="tryAgain()">TRY AGAIN</button>
+            <button type="button" class="btn" onclick="tryAgain()">TRY AGAIN</button>
         </div>
     </div>
 
-    <!-- 3. Gift Menu Screen -->
     <div id="gift-screen" class="screen">
         <div class="gift-container-box">
             <h2>CLICK ON GIFTS TO OPEN 🎁</h2>
@@ -105,27 +78,25 @@
         </div>
     </div>
 
-    <!-- 4. Gift 1: My Feelings (With Typing Effect & Pic 2) -->
     <div id="gift-camera" class="screen">
         <div class="split-view">
             <div class="text-side">
                 <h2>To the love of my life... 🌸</h2>
                 <div id="typing-container" class="typewriter-text"></div>
             </div>
-            <div class="visual-side fade-in-right">
+            <div class="visual-side">
                 <div class="camera-mockup-frame">
-                    <img src="IMG_20260704_181521.jpg.jpeg" alt="Camera View">
+                    <img src="IMG_20260704_181521.jpg.jpeg" alt="Camera Memory">
                     <div class="frame-caption">Just You & Me ✨</div>
                 </div>
             </div>
         </div>
-        <button class="btn back-btn" onclick="backToGifts()">Back to Choices</button>
+        <button type="button" class="btn back-btn" onclick="backToGifts()">Back to Choices</button>
     </div>
 
-    <!-- 5. Gift 2: The Love Vault -->
     <div id="gift-cake" class="screen">
         <div class="split-view reverse">
-            <div class="visual-side fade-in-left">
+            <div class="visual-side">
                 <div class="vault-card" onclick="flipVaultCard(this)">
                     <div class="vault-front">
                         <div class="lock-icon">❤️</div>
@@ -138,16 +109,15 @@
                     </div>
                 </div>
             </div>
-            <div class="text-side fade-in-right">
+            <div class="text-side">
                 <h2>A Little Secret 🤫</h2>
                 <p>May this year be full of little wins, warm conversations and moments that remind just how loved you are.</p>
                 <p style="color: #ffb3c1; font-size: 1rem;">(Click on the red card to flip and read the note!)</p>
             </div>
         </div>
-        <button class="btn back-btn" onclick="backToGifts()">Back to Choices</button>
+        <button type="button" class="btn back-btn" onclick="backToGifts()">Back to Choices</button>
     </div>
 
-    <!-- 6. Gift 3: Polaroid Memory Gallery Slider -->
     <div id="gift-gallery" class="screen">
         <div class="gallery-window">
             <h2 class="gallery-title">Moments I Cherish With You 💖</h2>
@@ -193,18 +163,17 @@
             </div>
 
             <div class="slider-controls">
-                <button class="btn-arrow" onclick="prevSlide()">❮ Prev</button>
-                <button class="btn-arrow" onclick="nextSlide()">Next ❯</button>
+                <button type="button" class="btn-arrow" onclick="prevSlide()">❮ Prev</button>
+                <button type="button" class="btn-arrow" onclick="nextSlide()">Next ❯</button>
             </div>
 
-            <button id="final-surprise-btn" class="btn final-proposal-trigger" onclick="goToProposal()" style="display:none; margin-top: 25px; background: #ff4d6d; color: white; box-shadow: 0 0 15px #ff4d6d;">Continue to Final Surprise 💌</button>
+            <button type="button" id="final-surprise-btn" class="btn final-proposal-trigger" onclick="goToProposal()" style="display:none; margin-top: 25px; background: #ff4d6d; color: white; box-shadow: 0 0 15px #ff4d6d;">Continue to Final Surprise 💌</button>
         </div>
     </div>
 
-    <!-- 7. Final Proposal Screen -->
     <div id="final-screen" class="screen">
         <div class="split-view">
-            <div class="text-side proposal-text fade-in-left">
+            <div class="text-side proposal-text">
                 <h1>To the love of my life... ❤️</h1>
                 <div class="letter-scroll">
                     <p>To the man who has stolen my heart (and never returned it 🤭).</p>
@@ -215,11 +184,11 @@
                     <h3 class="final-ask">I WANT TO ANNOY YOU for the rest of your life. 🥰</h3>
                 </div>
                 <div class="action-buttons">
-                    <button class="btn yes-btn" onclick="celebrate()">YES! 💖</button>
-                    <button class="btn no-btn" onmouseover="moveNoButton()" id="no-btn">NO 🥺</button>
+                    <button type="button" class="btn yes-btn" onclick="celebrate()">YES! 💖</button>
+                    <button type="button" class="btn no-btn" onmouseover="moveNoButton()" id="no-btn">NO 🥺</button>
                 </div>
             </div>
-            <div class="visual-side fade-in-right">
+            <div class="visual-side">
                 <div class="premium-polaroid final-frame">
                     <img src="IMG_20260704_181355.jpg.jpeg" alt="The One">
                     <p class="caption">I love you ohhhuu 🐧 (you'll always be my fvrt)</p>
