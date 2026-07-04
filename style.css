@@ -48,12 +48,13 @@ body {
     gap: 50px;
 }
 
+/* স্ক্রিনশট ইমেজটি পারফেক্টলি গোল ফ্রেমে ফিট করার জন্য */
 .heart-frame img {
     width: 260px;
     height: 260px;
     border-radius: 50%;
     border: 6px solid #ff4d6d;
-    object-fit: cover;
+    object-fit: cover; 
     box-shadow: 0 0 20px #ff4d6d;
 }
 
@@ -182,10 +183,11 @@ body {
 
 .polaroid:nth-child(even) { transform: rotate(4deg); }
 
+/* পোলারয়েড ফ্রেমে স্ক্রিনশটের ছবি সুন্দর দেখানোর জন্য */
 .polaroid img {
     width: 160px;
     height: 160px;
-    object-fit: cover;
+    object-fit: cover; 
     border-radius: 2px;
 }
 
