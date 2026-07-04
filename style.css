@@ -249,4 +249,11 @@ body {
 .final-frame { transform: rotate(2deg) scale(1.05); }
 .action-buttons { margin-top: 25px; display: flex; gap: 20px; }
 .yes-btn { background: #ff4d6d; color: white; box-shadow: 0 0 15px #ff4d6d; }
-.no-btn { background: #555; color: white; position: absolute; }
+.no-btn { background: #555; color: white; position: absolute; }.bg-hearts, .heart-particle {
+    pointer-events: none !important;
+    z-index: -1 !important;
+}
+.keypad, .keypad button {
+    pointer-events: auto !important;
+    z-index: 9999 !important;
+}
