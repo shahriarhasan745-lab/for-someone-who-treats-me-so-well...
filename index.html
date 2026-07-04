@@ -3,37 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Khushi ❤️</title>
+    <title>For Someone Special ✨</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="intro-overlay">
-        <h1 class="birthday-wish">Happy Birthday <br><span>Khushi</span></h1>
-        <div class="hearts-loader">❤️</div>
-    </div>
+    <!-- ব্যাকগ্রাউন্ড মিউজিক (তোমার পছন্দের যেকোনো কিউট বা রোমান্টিক গানের লিংক দিতে পারো) -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
-    <div id="hearts-container"></div>
-
-    <div class="main-container" id="main-content" style="display: none;">
-        <div class="card">
-            <div class="img-box">
-                <img src="Screenshot 2026-03-03 155312.png" id="slider-img" alt="Memory">
+    <!-- ১. লক স্ক্রিন -->
+    <div id="lock-screen" class="screen active" onclick="playMusicOnce()">
+        <div class="lock-container">
+            <div class="left-panel">
+                <div class="heart-frame">
+                    <!-- এখানে একটা কিউট পেঙ্গুইন বা সুন্দর ছবি দেবে -->
+                    <img src="penguin-love.jpg" alt="Cute Penguin">
+                </div>
             </div>
-
-            <div class="text-box">
-                <h2 id="title">"Instant Spark"</h2>
-                <p id="desc">Every time you smile, the world gets brighter. 😊</p>
+            <div class="right-panel">
+                <h3>Enter a passcode</h3>
+                <p class="hint">(Hint: Your Birthday? Or a Special Date? 🤭)</p>
+                <div class="dots-container">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="keypad">
+                    <button onclick="pressKey(1)">1</button>
+                    <button onclick="pressKey(2)">2</button>
+                    <button onclick="pressKey(3)">3</button>
+                    <button onclick="pressKey(4)">4</button>
+                    <button onclick="pressKey(5)">5</button>
+                    <button onclick="pressKey(6)">6</button>
+                    <button onclick="pressKey(7)">7</button>
+                    <button onclick="pressKey(8)">8</button>
+                    <button onclick="pressKey(9)">9</button>
+                    <button onclick="pressKey('*')">*</button>
+                    <button onclick="pressKey(0)">0</button>
+                    <button onclick="pressKey('#')">#</button>
+                </div>
             </div>
         </div>
-        <button class="music-btn" id="playBtn" style="margin-top: 15px;">🎵 Play Music</button>
     </div>
 
-    <audio id="myAudio" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+    <!-- ২. ভুল পাসকোড স্ক্রিন -->
+    <div id="wrong-screen" class="screen">
+        <div class="wrong-container">
+            <h1>WRONG PASSCODE</h1>
+            <div class="peeking-penguin">❓🐧</div>
+            <p>উঁহু! পাসকোডটা কিন্তু মিলল না। আবার চেষ্টা করো তো! 👀</p>
+            <button class="btn" onclick="tryAgain()">TRY AGAIN</button>
+        </div>
+    </div>
+
+    <!-- ৩. গিফট স্ক্রিন -->
+    <div id="gift-screen" class="screen">
+        <div class="gift-container-box">
+            <h2>CLICK ON A GIFT TO OPEN 🎁</h2>
+            <div class="gifts-grid">
+                <div class="gift-box" onclick="openGift()">💝</div>
+                <div class="gift-box" onclick="openGift()">🎁</div>
+                <div class="gift-box" onclick="openGift()">🎀</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ৪. ফাইনাল প্রpোজাল স্ক্রিন -->
+    <div id="final-screen" class="screen">
+        <div class="proposal-container">
+            <h1 class="main-title">To the most beautiful person... ❤️</h1>
+            
+            <div class="letter-box">
+                <p>হুট করেই আমার জীবনে তোমার আসা, আর তারপর থেকে সবকিছুই কেমন যেন সুন্দর হয়ে গেল।</p>
+                <p>সবসময় সরাসরি বলতে পারি না, তাই এই ছোট্ট চেষ্টা। তুমি হাসলে আমার পুরো দিনটাই ভালো হয়ে যায়। ✨</p>
+            </div>
+
+            <div class="photo-gallery">
+                <div class="polaroid">
+                    <img src="photo1.jpg" alt="Moments">
+                    <p>Your Smile ✨</p>
+                </div>
+                <div class="polaroid">
+                    <img src="photo2.jpg" alt="Moments">
+                    <p>Crossed Paths 💖</p>
+                </div>
+            </div>
+
+            <h2 class="confession-text">I really, really like you. Will you be mine? 🥰</h2>
+            
+            <div class="action-buttons">
+                <button class="btn yes-btn" onclick="celebrate()">YES! 💖</button>
+                <button class="btn no-btn" onmouseover="moveNoButton()" id="no-btn">NO 🥺</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
