@@ -8,23 +8,22 @@
 </head>
 <body>
 
-    <!-- ব্যাকগ্রাউন্ড মিউজিক -->
+    <!-- Background Music -->
     <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- ১. লক স্ক্রিন -->
+    <!-- 1. Lock Screen -->
     <div id="lock-screen" class="screen active" onclick="playMusicOnce()">
         <div class="lock-container">
             <div class="left-panel">
                 <div class="heart-frame">
-                    <!-- এখানে তোমার ১ম স্ক্রিনশটের নাম (screen1.png) দেওয়া হয়েছে -->
-                    <img src="screen1.png" alt="Special Pic">
+                    <img src="IMG_20260704_181355.jpg.jpeg" alt="Special Pic">
                 </div>
             </div>
             <div class="right-panel">
                 <h3>Enter a passcode</h3>
-                <p class="hint">(Hint: Your Birthday? Or a Special Date? 🤭)</p>
+                <p class="hint">(Hint: A very special date? 🤭)</p>
                 <div class="dots-container">
                     <span class="dot"></span>
                     <span class="dot"></span>
@@ -49,53 +48,83 @@
         </div>
     </div>
 
-    <!-- ২. ভুল পাসকোড স্ক্রিন -->
+    <!-- 2. Wrong Passcode Screen -->
     <div id="wrong-screen" class="screen">
         <div class="wrong-container">
             <h1>WRONG PASSCODE</h1>
             <div class="peeking-penguin">❓🐧</div>
-            <p>উঁহু! পাসকোডটা কিন্তু মিলল না। আবার চেষ্টা করো তো! 👀</p>
+            <p>Oops! That's not the right code. Try again! 👀</p>
             <button class="btn" onclick="tryAgain()">TRY AGAIN</button>
         </div>
     </div>
 
-    <!-- ৩. গিফট স্ক্রিন -->
+    <!-- 3. Gift Menu Screen -->
     <div id="gift-screen" class="screen">
         <div class="gift-container-box">
-            <h2>CLICK ON A GIFT TO OPEN 🎁</h2>
+            <h2>CLICK ON GIFTS TO OPEN 🎁</h2>
+            <p style="color: #ffb3c1; margin-bottom: 20px;">Explore all the gifts one by one...</p>
             <div class="gifts-grid">
-                <div class="gift-box" onclick="openGift()">💝</div>
-                <div class="gift-box" onclick="openGift()">🎁</div>
-                <div class="gift-box" onclick="openGift()">🎀</div>
+                <div class="gift-box" onclick="openGift('camera')">📷 <p>Gift 1</p></div>
+                <div class="gift-box" onclick="openGift('cake')">🎂 <p>Gift 2</p></div>
+                <div class="gift-box" onclick="openGift('gallery')">💖 <p>Gift 3</p></div>
             </div>
         </div>
     </div>
 
-    <!-- ৪. ফাইনাল প্রপোজাল স্ক্রিন -->
+    <!-- 4. Gift 1: Message -->
+    <div id="gift-camera" class="screen">
+        <div class="gift-window">
+            <h2>A Little Message For You ✨</h2>
+            <div class="letter-box">
+                <p>May this year be full of little wins, warm conversations, and moments that remind you just how loved you are.</p>
+                <p>You bring a soft kind of magic to every day, and I hope today wraps you in calm moments and pure happiness.</p>
+            </div>
+            <button class="btn" onclick="backToGifts()">Back to Gifts</button>
+        </div>
+    </div>
+
+    <!-- 5. Gift 2: Cake Wish -->
+    <div id="gift-cake" class="screen">
+        <div class="gift-window">
+            <h2>MAKE A WISH 🎂</h2>
+            <div class="cake-box">🍓🎂🍓</div>
+            <p class="cake-text">I pray that all your dreams come true and that you are always happy. Truly want to see you smile forever!</p>
+            <button class="btn" onclick="backToGifts()">Back to Gifts</button>
+        </div>
+    </div>
+
+    <!-- 6. Gift 3: Polaroid Memory Gallery Slider -->
+    <div id="gift-gallery" class="screen">
+        <div class="gallery-window">
+            <h2>Moments I Cherish With You 💖</h2>
+            
+            <div class="slider-container">
+                <div class="slide active"><img src="FB_IMG_17831668821594879.jpg.jpg"><p>Your Beautiful Smile ✨</p></div>
+                <div class="slide"><img src="FB_IMG_17831670241742378.jpg.jpg"><p>Vibing Together 🎵</p></div>
+                <div class="slide"><img src="IMG_20260704_181521.jpg.jpeg"><p>Shy Little Moments 🥰</p></div>
+                <div class="slide"><img src="IMG_20260704_181614.jpg.jpeg"><p>Classroom Memories 🌸</p></div>
+                <div class="slide"><img src="IMG_20260704_181633.jpg.jpeg"><p>Sharing Secrets 🤫</p></div>
+                <div class="slide"><img src="IMG_20260704_181703.jpg.jpeg"><p>Studying Together 📚</p></div>
+                <div class="slide"><img src="IMG_20260704_181722.jpg.jpeg"><p>Focused & Prettiest 👀</p></div>
+            </div>
+
+            <div class="slider-controls">
+                <button class="btn-arrow" onclick="prevSlide()">❮ Prev</button>
+                <button class="btn-arrow" onclick="nextSlide()">Next ❯</button>
+            </div>
+
+            <button class="btn final-proposal-trigger" onclick="goToProposal()" style="display:none; margin-top: 20px; background: #ff4d6d; color: white;">Continue to Final Surprise 💌</button>
+        </div>
+    </div>
+
+    <!-- 7. Final Proposal Screen -->
     <div id="final-screen" class="screen">
         <div class="proposal-container">
-            <h1 class="main-title">To the most beautiful person... ❤️</h1>
-            
+            <h1 class="main-title">To the love of my life... ❤️</h1>
             <div class="letter-box">
-                <p>হুট করেই আমার জীবনে তোমার আসা, আর তারপর থেকে সবকিছুই কেমন যেন সুন্দর হয়ে গেল।</p>
-                <p>সবসময় সরাসরি বলতে পারি না, তাই এই ছোট্ট চেষ্টা। তুমি হাসলে আমার পুরো দিনটাই ভালো হয়ে যায়। ✨</p>
+                <p>To the person who stole my heart. No amount of words can fully explain how much you mean to me. You make my world softer, safer, and so much better.</p>
+                <h2 class="confession-text">I really, really like you. Will you be mine? 🥰</h2>
             </div>
-
-            <div class="photo-gallery">
-                <div class="polaroid">
-                    <!-- ২য় স্ক্রিনশট (screen2.png) -->
-                    <img src="screen2.png" alt="Moments">
-                    <p>Your Smile ✨</p>
-                </div>
-                <div class="polaroid">
-                    <!-- ৩য় স্ক্রিনশট (screen3.png) -->
-                    <img src="screen3.png" alt="Moments">
-                    <p>Crossed Paths 💖</p>
-                </div>
-            </div>
-
-            <h2 class="confession-text">I really, really like you. Will you be mine? 🥰</h2>
-            
             <div class="action-buttons">
                 <button class="btn yes-btn" onclick="celebrate()">YES! 💖</button>
                 <button class="btn no-btn" onmouseover="moveNoButton()" id="no-btn">NO 🥺</button>
@@ -106,4 +135,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
