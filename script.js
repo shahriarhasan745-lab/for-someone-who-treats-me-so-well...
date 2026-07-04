@@ -1,68 +1,74 @@
-const slides = [
-    { img: "Screenshot 2026-03-03 155312.png", title: "My Queen", desc: "Happy Birthday to the most special person! ❤️" },
-    { img: "Screenshot 2026-03-03 155243.png", title: "Beautiful Smile", desc: "Your smile is my favorite thing in the world." },
-    { img: "Screenshot 2026-03-03 155353.png", title: "Pure Magic", desc: "You make every moment magical. ✨" },
-    { img: "Screenshot 2026-03-03 155410.png", title: "Always Together", desc: "I'm so glad you were born today! 😍" }
-];
+// পাসকোড সেট করো (যেমন: ক্রাশের জন্মদিন অথবা তোমাদের কোনো স্পেশাল ডেট)
+const CORRECT_PIN = "1234"; 
+let currentInput = "";
+let musicStarted = false;
 
-let index = 0;
-const intro = document.getElementById('intro-overlay');
-const main = document.getElementById('main-content');
-const audio = document.getElementById('myAudio');
-const imgEl = document.getElementById('slider-img');
-const titleEl = document.getElementById('title');
-const descEl = document.getElementById('desc');
-
-// ৫ সেকেন্ড পর ইন্ট্রো সরিয়ে মেইন কন্টেন্ট দেখানো
-setTimeout(() => {
-    intro.style.opacity = '0';
-    setTimeout(() => {
-        intro.style.display = 'none';
-        main.style.display = 'block';
-        updateSlide();
-        // অটো গান শুরু করার চেষ্টা (ব্রাউজার পারমিশন দিলে)
-        audio.play().catch(() => console.log("Click the play button for music"));
-    }, 1500);
-}, 5000);
-
-function updateSlide() {
-    titleEl.classList.remove('animate-text');
-    descEl.classList.remove('animate-text');
-    imgEl.style.opacity = '0.7';
-
-    setTimeout(() => {
-        imgEl.src = slides[index].img;
-        titleEl.innerText = slides[index].title;
-        descEl.innerText = slides[index].desc;
-        imgEl.style.opacity = '1';
-        titleEl.classList.add('animate-text');
-        descEl.classList.add('animate-text');
-    }, 500);
-}
-
-// প্রতি ৪ সেকেন্ড পর পর ছবি অটো বদলাবে
-setInterval(() => {
-    if (main.style.display !== 'none') {
-        index = (index + 1) % slides.length;
-        updateSlide();
+// প্রথম ক্লিকেই ব্যাকগ্রাউন্ড মিউজিক প্লে করার জন্য (ব্রাউজার পলিসির কারণে এটি দরকার)
+function playMusicOnce() {
+    if (!musicStarted) {
+        const music = document.getElementById('bg-music');
+        music.play().catch(error => console.log("Audio play delayed"));
+        musicStarted = true;
     }
-}, 4000);
-
-// মিউজিক বাটন
-document.getElementById('playBtn').addEventListener('click', function() {
-    if (audio.paused) { audio.play(); this.innerText = "⏸ Pause"; }
-    else { audio.pause(); this.innerText = "🎵 Play"; }
-});
-
-// ব্যাকগ্রাউন্ড হার্ট এনিমেশন
-function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerHTML = '❤️';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-    heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 4000);
 }
-setInterval(createHeart, 400);
+
+function pressKey(num) {
+    playMusicOnce(); // মিউজিক সেফটি চেক
+    if (currentInput.length < 4) {
+        currentInput += num;
+        updateDots();
+    }
+
+    if (currentInput.length === 4) {
+        setTimeout(() => {
+            if (currentInput === CORRECT_PIN) {
+                switchScreen("lock-screen", "gift-screen");
+            } else {
+                switchScreen("lock-screen", "wrong-screen");
+            }
+        }, 300);
+    }
+}
+
+function updateDots() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+        if (index < currentInput.length) {
+            dot.classList.add('filled');
+        } else {
+            dot.classList.remove('filled');
+        }
+    });
+}
+
+function tryAgain() {
+    currentInput = "";
+    updateDots();
+    switchScreen("wrong-screen", "lock-screen");
+}
+
+function openGift() {
+    switchScreen("gift-screen", "final-screen");
+}
+
+function switchScreen(fromId, toId) {
+    document.getElementById(fromId).classList.remove('active');
+    document.getElementById(toId).classList.add('active');
+}
+
+// "NO" বাটনটি মাউস নিলেই দূরে সরে যাওয়ার ফানি ট্রিক
+function moveNoButton() {
+    const noBtn = document.getElementById('no-btn');
+    // স্ক্রিনের যেকোনো র্যান্ডম পজিশনে বাটনটি পাঠাবে
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 50);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 50);
+    
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+}
+
+// "YES" চাপলে অভিনন্দন অ্যানিমেশন অ্যালার্ট
+function celebrate() {
+    alert("Yayyy! 🥰 ❤️ I knew it! You just made my world beautiful!");
+}
