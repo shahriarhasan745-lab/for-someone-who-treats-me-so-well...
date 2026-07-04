@@ -6,7 +6,7 @@
 }
 
 body {
-    background: radial-gradient(circle, #5c1827 0%, #300a12 100%);
+    background: radial-gradient(circle, #4a121a 0%, #1f0509 100%);
     color: white;
     display: flex;
     justify-content: center;
@@ -22,221 +22,170 @@ body {
     justify-content: center;
     align-items: center;
     position: absolute;
-    padding: 20px;
+    padding: 40px;
 }
 
 .screen.active {
     display: flex;
-    animation: fadeIn 0.5s ease-in-out;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+/* Animations */
+.fade-in-left { animation: fadeInLeft 1s forwards cubic-bezier(0.19, 1, 0.22, 1); }
+.fade-in-right { animation: fadeInRight 1s forwards cubic-bezier(0.19, 1, 0.22, 1); }
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(60px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
-/* Lock Screen */
+/* Split View */
+.split-view {
+    display: flex;
+    width: 100%;
+    max-width: 950px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+.split-view.reverse { flex-direction: row-reverse; }
+
+.text-side { flex: 1; text-align: left; }
+.text-side h2 { color: #ff4d6d; margin-bottom: 20px; font-size: 2.2rem; }
+.text-side p { font-size: 1.2rem; line-height: 1.8; margin-bottom: 20px; color: #ffe5ec; }
+
+.visual-side { flex: 1; display: flex; justify-content: center; }
+
+/* Image Display Styling - Making your photos pop nicely! */
+.camera-mockup-frame, .premium-polaroid {
+    background: #ffffff;
+    padding: 16px 16px 32px 16px;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 4px rgba(255, 255, 255, 0.1) inset;
+    transition: transform 0.4s ease;
+}
+
+.camera-mockup-frame { transform: rotate(2.5deg); }
+.premium-polaroid { transform: rotate(-1.5deg); }
+
+/* Ensuring the images look sharp, completely filled, and never distorted */
+.camera-mockup-frame img, .premium-polaroid img {
+    width: 290px;
+    height: 350px;
+    object-fit: cover; /* This makes sure the portrait ratios fit perfectly without squeezing */
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.15);
+    display: block;
+}
+
+.frame-caption, .caption {
+    font-family: 'Courier New', monospace;
+    color: #2b2b2b;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+}
+
+/* Lock Screen & Avatar Setup */
 .lock-container {
     display: flex;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(15px);
     padding: 40px;
     border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     align-items: center;
     gap: 50px;
 }
 
 .heart-frame img {
-    width: 260px;
-    height: 260px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
-    border: 6px solid #ff4d6d;
-    object-fit: cover; 
-    box-shadow: 0 0 20px #ff4d6d;
+    border: 5px solid #ff4d6d;
+    object-fit: cover;
+    box-shadow: 0 0 25px rgba(255, 77, 109, 0.5);
 }
 
-.hint {
-    font-size: 0.8rem;
-    color: #ffb3c1;
-    margin-top: 5px;
-    font-style: italic;
-}
+.dots-container { display: flex; gap: 12px; justify-content: center; margin: 20px 0; }
+.dot { width: 16px; height: 16px; border: 2px solid #ff4d6d; border-radius: 50%; }
+.dot.filled { background-color: #ff4d6d; box-shadow: 0 0 10px #ff4d6d; }
 
-.dots-container {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.dot {
-    width: 16px;
-    height: 16px;
-    border: 2px solid #ff4d6d;
-    border-radius: 50%;
-}
-
-.dot.filled {
-    background-color: #ff4d6d;
-    box-shadow: 0 0 10px #ff4d6d;
-}
-
-.keypad {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
-
+.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .keypad button {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: 0.2s;
 }
+.keypad button:hover { background: #ff4d6d; border-color: #ff4d6d; }
 
-.keypad button:hover {
-    background: #ff4d6d;
-    border-color: #ff4d6d;
-}
-
-/* Wrong Screen */
-.wrong-container {
+/* Cake Setup */
+.cake-display {
     text-align: center;
-    background: rgba(0,0,0,0.4);
-    padding: 40px;
+    background: rgba(255,255,255,0.05);
+    padding: 30px;
     border-radius: 20px;
-}
-
-.peeking-penguin {
-    font-size: 6rem;
-    margin: 20px;
-    animation: peek 0.8s infinite alternate ease-in-out;
-}
-
-@keyframes peek {
-    0% { transform: translateY(10px); }
-    100% { transform: translateY(-10px); }
-}
-
-/* Gifts Menu */
-.gift-container-box, .gift-window, .gallery-window {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.1);
+}
+.cake-emoji { font-size: 5.5rem; margin-bottom: 15px; animation: floatCake 1.2s infinite alternate ease-in-out; }
+@keyframes floatCake { from { transform: translateY(0px); } to { transform: translateY(-12px); } }
+.click-hint { color: #ff4d6d; margin-top: 15px; font-weight: bold; cursor: pointer; }
+.flirt-line { font-style: italic; color: #ffb3c1 !important; font-size: 1.4rem !important; border-left: 4px solid #ff4d6d; padding-left: 15px; }
+
+/* Gallery Window adjustments */
+.gift-container-box, .gallery-window {
+    text-align: center;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(10px);
     padding: 40px;
     border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.1);
     max-width: 650px;
     width: 100%;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
+.gifts-grid { display: flex; justify-content: center; gap: 40px; font-size: 4.5rem; margin-top: 35px; }
+.gift-box { cursor: pointer; transition: 0.3s transform; }
+.gift-box:hover { transform: scale(1.2) rotate(4deg); }
+.gift-box p { font-size: 1rem; color: #ffb3c1; margin-top: 5px; }
 
-.gifts-grid {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    font-size: 4.5rem;
-    margin-top: 30px;
-}
-
-.gift-box {
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.gift-box p {
-    font-size: 1.1rem;
-    color: #ffb3c1;
-    margin-top: 8px;
-}
-
-.gift-box:hover { transform: scale(1.25) rotate(5deg); }
-
-/* Slider Container (Polaroid Style) */
+/* Slider Layout */
 .slider-container {
     position: relative;
-    height: 420px;
-    margin: 20px auto;
+    height: 440px;
+    margin: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.slide { display: none; }
+.slide.active { display: block; animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-.slide {
-    display: none;
-    background: white;
-    padding: 15px 15px 35px 15px;
-    color: #333;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-    border-radius: 4px;
-    transform: rotate(-1.5deg);
-}
+.slider-controls { display: flex; justify-content: center; gap: 20px; }
 
-.slide.active { display: block; animation: fadeIn 0.4s; }
-
-.slide img {
-    width: 280px;
-    height: 320px;
-    object-fit: cover;
-}
-
-.slide p {
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    margin-top: 12px;
-    font-size: 1rem;
-}
-
-.slider-controls {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 20px;
-}
-
-.cake-box {
-    font-size: 5rem;
-    margin: 20px 0;
-    animation: bounce 1s infinite alternate;
-}
-
-@keyframes bounce {
-    from { transform: scale(1); }
-    to { transform: scale(1.1); }
-}
-
-.letter-box p {
-    font-size: 1.15rem;
-    line-height: 1.7;
-    margin-bottom: 15px;
-}
-
-/* Buttons */
-.btn, .btn-arrow {
-    padding: 12px 30px;
-    font-weight: bold;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn { background: white; color: #300a12; }
+/* Buttons Setup */
+.btn, .btn-arrow { padding: 12px 28px; font-weight: bold; border: none; border-radius: 25px; cursor: pointer; transition: 0.3s; }
+.btn { background: white; color: #1f0509; }
 .btn:hover { background: #ff4d6d; color: white; transform: scale(1.05); }
-
-.btn-arrow { background: rgba(255,255,255,0.15); color: white; }
+.back-btn { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); }
+.btn-arrow { background: rgba(255,255,255,0.1); color: white; }
 .btn-arrow:hover { background: #ff4d6d; }
 
-/* Proposal Page */
-.proposal-container { text-align: center; max-width: 650px; }
-.main-title { color: #ff4d6d; margin-bottom: 25px; }
-.confession-text { margin-top: 25px; color: #ffb3c1; }
-.yes-btn { background: #ff4d6d; color: white; box-shadow: 0 0 20px #ff4d6d; }
-.no-btn { background: #6c757d; color: white; position: absolute; }
+/* Proposal Layout */
+.final-frame { transform: rotate(2deg) scale(1.05); }
+.final-ask { color: #ffb3c1; margin-top: 20px; }
+.action-buttons { margin-top: 25px; display: flex; gap: 20px; }
+.yes-btn { background: #ff4d6d; color: white; box-shadow: 0 0 15px #ff4d6d; }
+.no-btn { background: #555; color: white; position: absolute; }
